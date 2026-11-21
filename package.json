@@ -1,0 +1,29 @@
+{
+  "name": "audiobook-packer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "有声书打包工具:分章 MP3 拼接为带章节的 M4B / MP3,纯 TypeScript 实现,无音频封装库",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "gen-samples": "node dist/tools/gen_samples.js",
+    "test": "node dist/test/roundtrip.js",
+    "serve": "node serve.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "typescript": "^5.9.3"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/717441128-21699/ccfb-15134.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/717441128-21699/ccfb-15134/issues"
+  },
+  "homepage": "https://github.com/717441128-21699/ccfb-15134#readme"
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有声书打包工具</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>有声书打包工具</h1>
+  <nav>
+    <button data-page="book" class="active">书目</button>
+    <button data-page="chapters">章节编辑</button>
+    <button data-page="export">导出</button>
+    <button data-page="verify">校验</button>
+  </nav>
+</header>
+<main>
+  <!-- 书目页 -->
+  <section id="page-book" class="page active">
+    <h2>书目信息</h2>
+    <div class="book-grid">
+      <form id="meta-form" autocomplete="off">
+        <label>书名 <input id="meta-title" type="text" placeholder="例如:雪夜行"></label>
+        <label>演播/作者 <input id="meta-artist" type="text"></label>
+        <label>专辑 <input id="meta-album" type="text"></label>
+        <label>年份 <input id="meta-year" type="text" maxlength="10"></label>
+        <label>类型 <input id="meta-genre" type="text" value="Audiobook"></label>
+        <label>备注 <textarea id="meta-comment" rows="3"></textarea></label>
+      </form>
+      <div class="cover-box">
+        <div id="cover-preview"><span>无封面</span></div>
+        <input type="file" id="cover-input" accept="image/png,image/jpeg">
+        <button id="cover-clear" type="button">移除封面</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 章节编辑页 -->
+  <section id="page-chapters" class="page">
+    <h2>章节编辑</h2>
+    <div id="dropzone">
+      <p>把分章 MP3 文件拖到这里(可多选),或
+        <label class="file-btn">选择文件<input type="file" id="file-input" accept=".mp3,audio/mpeg" multiple></label>
+      </p>
+      <p class="hint">按文件名自然排序自动拼接;章节点取每段起点,逐帧精确到采样。</p>
+    </div>
+    <div id="chapters-summary"></div>
+    <table id="chapters-table">
+      <thead><tr><th>#</th><th>章节标题</th><th>源文件</th><th>时长</th><th>起始时间</th><th>操作</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </section>
+
+  <!-- 导出页 -->
+  <section id="page-export" class="page">
+    <h2>导出</h2>
+    <div id="export-errors" class="errors"></div>
+    <div class="export-actions">
+      <button id="btn-m4b" type="button">导出 M4B(chpl + QuickTime 章节轨)</button>
+      <button id="btn-mp3" type="button">导出 MP3(ID3v2.4 CHAP/CTOC)</button>
+    </div>
+    <div id="export-progress"></div>
+    <div id="export-results"></div>
+  </section>
+
+  <!-- 校验页 -->
+  <section id="page-verify" class="page">
+    <h2>成品校验</h2>
+    <p class="hint">把导出的 .m4b 或 .mp3 拖进来,重新解析章节表与元数据,并和当前工程逐项比对(容差 10ms)。</p>
+    <div id="verify-dropzone">
+      <label class="file-btn">选择成品文件<input type="file" id="verify-input" accept=".m4b,.mp3,.m4a,audio/mpeg"></label>
+      <span id="verify-filename"></span>
+    </div>
+    <div id="verify-results"></div>
+  </section>
+</main>
+<script type="module" src="dist/src/app.js"></script>
+</body>
+</html>
